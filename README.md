@@ -93,7 +93,3 @@ Dibuat dengan ❤️ oleh Muhammad Ulin Nuha.
 Jangan lupa kasih ⭐ jika project ini membantu kamu!
 
 ```
-Catatan:
-1. **Screenshot**: Kamu bisa menambahkan screenshot dengan menyimpan gambar di folder `screenshots` dan menyesuaikan nama file di bagian **Screenshot**.
-2. **Link Repository**: Ganti `https://github.com/username/nama-repository.git` dengan link repository GitHub kamu.
-3. **Lisensi**: Jika kamu mau menambahkan lisensi, buat file `LICENSE` di root project.
