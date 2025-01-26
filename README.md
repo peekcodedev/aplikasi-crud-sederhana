@@ -91,5 +91,3 @@ Project ini dilisensikan di bawah [MIT License](LICENSE).
 
 Dibuat dengan ❤️ oleh Muhammad Ulin Nuha.  
 Jangan lupa kasih ⭐ jika project ini membantu kamu!
-
-```
