@@ -4,12 +4,14 @@ Aplikasi CRUD (Create, Read, Update, Delete) sederhana yang dibangun menggunakan
 
 ---
 
-## Fitur ✨
+## Fitur yang Sudah Ditambahkan ✨
 
-- **Create**: Menambahkan data pengguna baru ke database.
-- **Read**: Menampilkan daftar pengguna dari database.
-- **Update**: Mengedit detail pengguna yang sudah ada.
-- **Delete**: Menghapus pengguna dari database.
+### **Tahap 1: Authentication & Validasi Form**
+- **Registrasi Pengguna**: Pengguna dapat mendaftar dengan nama, email, dan password.
+- **Login Pengguna**: Pengguna dapat login menggunakan email dan password.
+- **Validasi Form**: Validasi input di sisi server dan client.
+- **Dashboard**: Halaman setelah login berhasil.
+- **Logout**: Pengguna dapat logout dari aplikasi.
 
 ---
 
@@ -41,7 +43,8 @@ Aplikasi CRUD (Create, Read, Update, Delete) sederhana yang dibangun menggunakan
      CREATE TABLE users (
          id INT AUTO_INCREMENT PRIMARY KEY,
          name VARCHAR(100) NOT NULL,
-         email VARCHAR(100) NOT NULL UNIQUE
+         email VARCHAR(100) NOT NULL UNIQUE,
+         password VARCHAR(255) NOT NULL
      );
      ```
 3. **Simpan Project**:
@@ -61,14 +64,14 @@ Aplikasi CRUD (Create, Read, Update, Delete) sederhana yang dibangun menggunakan
 
 ## Screenshot 📸
 
-### Halaman Utama (Read)
-![Halaman Utama](screenshots/index.png)
+### Halaman Registrasi
+![Halaman Registrasi](screenshots/register.png)
 
-### Tambah Pengguna (Create)
-![Tambah Pengguna](screenshots/create.png)
+### Halaman Login
+![Halaman Login](screenshots/login.png)
 
-### Edit Pengguna (Update)
-![Edit Pengguna](screenshots/edit.png)
+### Halaman Dashboard
+![Halaman Dashboard](screenshots/dashboard.png)
 
 ---
 
