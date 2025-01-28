@@ -75,3 +75,16 @@ th {
 .pagination a:hover:not(.active) {
     background-color: #ddd;
 }
+input[type="file"] {
+    margin-bottom: 10px;
+}
+
+.role-admin {
+    color: red;
+    font-weight: bold;
+}
+
+.role-user {
+    color: green;
+    font-weight: bold;
+}

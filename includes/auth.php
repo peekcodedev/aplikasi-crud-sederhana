@@ -4,13 +4,14 @@ session_start();
 include 'config.php';
 
 // Fungsi untuk registrasi
-function register($name, $email, $password) {
+function register($name, $email, $password, $profile_picture) {
     global $conn;
     $hashed_password = password_hash($password, PASSWORD_DEFAULT); // Hash password
-    $stmt = $conn->prepare("INSERT INTO users (name, email, password) VALUES (:name, :email, :password)");
+    $stmt = $conn->prepare("INSERT INTO users (name, email, password, profile_picture, role) VALUES (:name, :email, :password, :profile_picture, 'user')");
     $stmt->bindParam(':name', $name);
     $stmt->bindParam(':email', $email);
     $stmt->bindParam(':password', $hashed_password);
+    $stmt->bindParam(':profile_picture', $profile_picture);
     return $stmt->execute();
 }
 
@@ -25,6 +26,7 @@ function login($email, $password) {
     if ($user && password_verify($password, $user['password'])) {
         $_SESSION['user_id'] = $user['id'];
         $_SESSION['user_name'] = $user['name'];
+        $_SESSION['user_role'] = $user['role']; // Set session role
         return true;
     }
     return false;

@@ -3,12 +3,12 @@
 session_start();
 include 'includes/functions.php';
 include 'includes/auth.php';
-
-if (!is_logged_in()) {
-    redirect('login.php');
-}
-
 include 'includes/config.php';
+
+// Cek apakah pengguna sudah login dan memiliki role admin
+if (!is_logged_in() || $_SESSION['user_role'] != 'admin') {
+    redirect('index.php');
+}
 
 $error = '';
 $user = [];
@@ -31,6 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $id = (int)$_POST['id'];
     $name = trim($_POST['name']);
     $email = trim($_POST['email']);
+    $profile_picture = $_FILES['profile_picture'];
 
     // Validasi input
     if (empty($name) || empty($email)) {
@@ -38,15 +39,47 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $error = 'Email tidak valid!';
     } else {
-        // Update data pengguna
-        $stmt = $conn->prepare("UPDATE users SET name = :name, email = :email WHERE id = :id");
-        $stmt->bindParam(':name', $name);
-        $stmt->bindParam(':email', $email);
-        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
-        if ($stmt->execute()) {
-            redirect('index.php');
+        // Jika ada file yang diupload
+        if ($profile_picture['error'] == 0) {
+            $allowed_types = ['image/jpeg', 'image/png', 'image/gif'];
+            $max_size = 2 * 1024 * 1024; // 2MB
+
+            if (!in_array($profile_picture['type'], $allowed_types)) {
+                $error = 'File harus berupa gambar (JPEG, PNG, GIF)!';
+            } elseif ($profile_picture['size'] > $max_size) {
+                $error = 'Ukuran file tidak boleh lebih dari 2MB!';
+            } else {
+                $upload_dir = 'uploads/';
+                $file_name = uniqid() . '_' . basename($profile_picture['name']);
+                $file_path = $upload_dir . $file_name;
+
+                if (move_uploaded_file($profile_picture['tmp_name'], $file_path)) {
+                    // Update data pengguna dengan foto profil baru
+                    $stmt = $conn->prepare("UPDATE users SET name = :name, email = :email, profile_picture = :profile_picture WHERE id = :id");
+                    $stmt->bindParam(':name', $name);
+                    $stmt->bindParam(':email', $email);
+                    $stmt->bindParam(':profile_picture', $file_path);
+                    $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+                    if ($stmt->execute()) {
+                        redirect('index.php');
+                    } else {
+                        $error = 'Gagal mengupdate pengguna!';
+                    }
+                } else {
+                    $error = 'Gagal mengupload file!';
+                }
+            }
         } else {
-            $error = 'Gagal mengupdate pengguna!';
+            // Update data pengguna tanpa mengubah foto profil
+            $stmt = $conn->prepare("UPDATE users SET name = :name, email = :email WHERE id = :id");
+            $stmt->bindParam(':name', $name);
+            $stmt->bindParam(':email', $email);
+            $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+            if ($stmt->execute()) {
+                redirect('index.php');
+            } else {
+                $error = 'Gagal mengupdate pengguna!';
+            }
         }
     }
 }
@@ -65,7 +98,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <?php if ($error): ?>
         <?php echo display_error($error); ?>
     <?php endif; ?>
-    <form method="POST">
+    <form method="POST" enctype="multipart/form-data">
         <input type="hidden" name="id" value="<?php echo $user['id']; ?>">
         <div class="form-group">
             <label for="name">Nama:</label>
@@ -74,6 +107,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <div class="form-group">
             <label for="email">Email:</label>
             <input type="email" id="email" name="email" value="<?php echo htmlspecialchars($user['email']); ?>" required>
+        </div>
+        <div class="form-group">
+            <label for="profile_picture">Foto Profil:</label>
+            <input type="file" id="profile_picture" name="profile_picture">
+            <?php if ($user['profile_picture']): ?>
+                <p>Foto Profil Saat Ini: <img src="<?php echo $user['profile_picture']; ?>" width="100"></p>
+            <?php endif; ?>
         </div>
         <button type="submit">Update</button>
     </form>

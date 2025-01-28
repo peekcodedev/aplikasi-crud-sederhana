@@ -97,8 +97,10 @@ try {
                 <td><?php echo htmlspecialchars($user['name']); ?></td>
                 <td><?php echo htmlspecialchars($user['email']); ?></td>
                 <td>
+                    <?php if ($_SESSION['user_role'] == 'admin'): ?>
                     <a href="edit.php?id=<?php echo $user['id']; ?>" class="btn btn-edit">Edit</a>
                     <a href="delete.php?id=<?php echo $user['id']; ?>" class="btn btn-delete" onclick="return confirm('Yakin ingin menghapus?')">Hapus</a>
+                    <?php endif; ?>
                 </td>
             </tr>
             <?php endforeach; ?>

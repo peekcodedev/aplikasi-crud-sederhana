@@ -13,6 +13,19 @@ Aplikasi CRUD (Create, Read, Update, Delete) sederhana yang dibangun menggunakan
 - **Dashboard**: Halaman setelah login berhasil.
 - **Logout**: Pengguna dapat logout dari aplikasi.
 
+### **Tahap 2: Authentication & Validasi Form**
+- **Implementasi pagination** untuk membagi data menjadi beberapa halaman.
+- **Tambahkan fitur pencarian** berdasarkan nama atau email.
+- **Implementasi sorting data** (ascending/descending) berdasarkan kolom tertentu.
+- **Perbaiki tampilan tabel** agar lebih user-friendly.
+
+### **Tahap 3: Upload File & Role-Based Access Control (RBAC)**
+- **Tambahkan kolom** `profile_picture` di tabel `users`.
+- **Implementasi fitur upload foto profil.**
+- **Validasi ukuran dan tipe file** yang diupload.
+- **Tambahkan sistem role (Admin dan User)** dengan hak akses yang berbeda.
+- **Batasi akses CRUD** berdasarkan role pengguna.
+
 ---
 
 ## Teknologi yang Digunakan 🛠️
