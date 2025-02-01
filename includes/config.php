@@ -1,5 +1,5 @@
 <?php
-// config.php
+// includes/config.php
 $host = 'localhost'; // Host database
 $dbname = 'crud_example'; // Nama database
 $username = 'root'; // Username database

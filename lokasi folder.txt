@@ -1,0 +1,22 @@
+/CRUD
+│
+├── /css
+│   └── style.css       # File CSS untuk styling
+│
+├── /includes
+│   ├── config.php      # File konfigurasi database
+│   ├── auth.php        # File untuk fungsi login/register
+│   └── functions.php   # File untuk fungsi helper
+│
+├── /uploads            # Folder untuk menyimpan file yang diupload
+│
+├── index.php           # Halaman utama setelah login
+├── login.php           # Halaman login
+├── register.php        # Halaman registrasi
+├── create.php          # Halaman untuk menambah pengguna
+├── edit.php            # Halaman untuk mengedit pengguna
+├── delete.php          # Halaman untuk menghapus pengguna
+├── dashboard.php       # Halaman dashboard setelah login
+├── export.php          # Halaman untuk export data
+├── import.php          # Halaman untuk import data
+└── logout.php          # File untuk logout

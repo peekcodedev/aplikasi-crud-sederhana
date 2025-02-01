@@ -6,7 +6,7 @@ include 'includes/auth.php';
 include 'includes/config.php';
 
 // Cek apakah pengguna sudah login dan memiliki role admin
-if (!is_logged_in() || $_SESSION['user_role'] != 'admin') {
+if (!is_logged_in() || $_SESSION['role'] != 'admin') { // Ubah dari $_SESSION['user_role'] menjadi $_SESSION['role']
     redirect('index.php');
 }
 
@@ -61,6 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     $stmt->bindParam(':profile_picture', $file_path);
                     $stmt->bindParam(':id', $id, PDO::PARAM_INT);
                     if ($stmt->execute()) {
+                        $_SESSION['notification'] = ['message' => 'Pengguna berhasil diupdate!', 'type' => 'success'];
                         redirect('index.php');
                     } else {
                         $error = 'Gagal mengupdate pengguna!';
@@ -76,6 +77,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $stmt->bindParam(':email', $email);
             $stmt->bindParam(':id', $id, PDO::PARAM_INT);
             if ($stmt->execute()) {
+                $_SESSION['notification'] = ['message' => 'Pengguna berhasil diupdate!', 'type' => 'success'];
                 redirect('index.php');
             } else {
                 $error = 'Gagal mengupdate pengguna!';

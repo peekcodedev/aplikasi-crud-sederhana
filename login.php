@@ -1,5 +1,6 @@
 <?php
 // login.php
+session_start();
 include 'includes/config.php';
 include 'includes/auth.php';
 include 'includes/functions.php';
@@ -14,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $error = 'Semua field harus diisi!';
     } else {
         if (login($email, $password)) {
-            redirect('dashboard.php');
+            redirect('dashboard.php'); // Arahkan ke dashboard.php setelah login
         } else {
             $error = 'Email atau password salah!';
         }

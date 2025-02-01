@@ -13,21 +13,24 @@ function redirect($url) {
     exit();
 }
 
-// Fungsi untuk pagination
-function get_pagination($total_records, $records_per_page, $current_page) {
-    $total_pages = ceil($total_records / $records_per_page);
-    return [
-        'total_pages' => $total_pages,
-        'offset' => ($current_page - 1) * $records_per_page
-    ];
+// Fungsi untuk validasi file upload
+function validate_file($file) {
+    $allowed_types = ['image/jpeg', 'image/png', 'image/gif'];
+    $max_size = 2 * 1024 * 1024; // 2MB
+
+    if (!in_array($file['type'], $allowed_types)) {
+        return "File harus berupa gambar (JPEG, PNG, GIF).";
+    }
+
+    if ($file['size'] > $max_size) {
+        return "Ukuran file tidak boleh lebih dari 2MB.";
+    }
+
+    return null; // Tidak ada error
 }
 
-// Fungsi untuk sorting
-function get_sort_order($column) {
-    $order = 'asc';
-    if (isset($_GET['order']) && $_GET['order'] == 'asc') {
-        $order = 'desc';
-    }
-    return "ORDER BY $column $order";
+// Fungsi untuk pengecekan role
+function is_admin() {
+    return isset($_SESSION['role']) && $_SESSION['role'] === 'admin';
 }
 ?>

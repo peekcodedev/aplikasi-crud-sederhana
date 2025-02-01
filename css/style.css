@@ -42,7 +42,20 @@ th {
     text-decoration: none;
     color: white;
     border-radius: 3px;
+    margin-right: 5px;
 }
+.btn-export {
+    background-color: #4CAF50; /* Warna hijau */
+}
+
+.btn-logout {
+    background-color: #f44336; /* Warna merah */
+}
+
+.btn-import {
+    background-color: #f44336; /* Warna merah */
+}
+
 .btn-edit {
     background-color: #4CAF50; /* Warna hijau */
     color: white;
@@ -88,3 +101,19 @@ input[type="file"] {
     color: green;
     font-weight: bold;
 }
+/* css/style.css */
+.notification {
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    color: white;
+}
+
+.notification.success {
+    background-color: #4CAF50;
+}
+
+.notification.error {
+    background-color: #f44336;
+}
+

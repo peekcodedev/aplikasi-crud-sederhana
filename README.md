@@ -26,6 +26,10 @@ Aplikasi CRUD (Create, Read, Update, Delete) sederhana yang dibangun menggunakan
 - **Tambahkan sistem role (Admin dan User)** dengan hak akses yang berbeda.
 - **Batasi akses CRUD** berdasarkan role pengguna.
 
+### **Tahap 4: Export/Import Data & Notifikasi**
+- **Export Data**: Pengguna dapat mengekspor data pengguna ke format CSV.
+- **Import Data**: Pengguna dapat mengimpor data pengguna dari file CSV.
+- **Notifikasi**: Tampilkan pesan sukses atau error saat melakukan operasi.
 ---
 
 ## Teknologi yang Digunakan 🛠️
@@ -53,12 +57,14 @@ Aplikasi CRUD (Create, Read, Update, Delete) sederhana yang dibangun menggunakan
    - Buat database baru di MySQL dengan nama `crud_example`.
    - Jalankan query berikut untuk membuat tabel `users`:
      ```sql
-     CREATE TABLE users (
-         id INT AUTO_INCREMENT PRIMARY KEY,
-         name VARCHAR(100) NOT NULL,
-         email VARCHAR(100) NOT NULL UNIQUE,
-         password VARCHAR(255) NOT NULL
-     );
+   CREATE TABLE `users` (
+   `id` int NOT NULL,
+   `name` varchar(100) NOT NULL,
+   `email` varchar(100) NOT NULL,
+   `password` varchar(255) NOT NULL,
+   `role` enum('admin','user') DEFAULT 'user',
+   `profile_picture` varchar(255) DEFAULT NULL
+   );
      ```
 3. **Simpan Project**:
    - Letakkan folder project di dalam direktori web server (misalnya, `htdocs` untuk XAMPP).

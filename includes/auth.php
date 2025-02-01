@@ -1,16 +1,16 @@
 <?php
 // includes/auth.php
-session_start();
 include 'config.php';
 
 // Fungsi untuk registrasi
-function register($name, $email, $password, $profile_picture) {
+function register($name, $email, $password, $role, $profile_picture = null) {
     global $conn;
     $hashed_password = password_hash($password, PASSWORD_DEFAULT); // Hash password
-    $stmt = $conn->prepare("INSERT INTO users (name, email, password, profile_picture, role) VALUES (:name, :email, :password, :profile_picture, 'user')");
+    $stmt = $conn->prepare("INSERT INTO users (name, email, password, role, profile_picture) VALUES (:name, :email, :password, :role, :profile_picture)");
     $stmt->bindParam(':name', $name);
     $stmt->bindParam(':email', $email);
     $stmt->bindParam(':password', $hashed_password);
+    $stmt->bindParam(':role', $role);
     $stmt->bindParam(':profile_picture', $profile_picture);
     return $stmt->execute();
 }
@@ -26,7 +26,7 @@ function login($email, $password) {
     if ($user && password_verify($password, $user['password'])) {
         $_SESSION['user_id'] = $user['id'];
         $_SESSION['user_name'] = $user['name'];
-        $_SESSION['user_role'] = $user['role']; // Set session role
+        $_SESSION['role'] = $user['role']; // Simpan role di session
         return true;
     }
     return false;

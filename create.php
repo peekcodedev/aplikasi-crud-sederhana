@@ -31,6 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $stmt->bindParam(':email', $email);
         $stmt->bindParam(':password', $hashed_password); // Sertakan password
         if ($stmt->execute()) {
+            $_SESSION['notification'] = ['message' => 'Pengguna berhasil ditambahkan!', 'type' => 'success'];
             redirect('index.php');
         } else {
             $error = 'Gagal menambahkan pengguna!';

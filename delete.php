@@ -6,7 +6,7 @@ include 'includes/auth.php';
 include 'includes/config.php';
 
 // Cek apakah pengguna sudah login dan memiliki role admin
-if (!is_logged_in() || $_SESSION['user_role'] != 'admin') {
+if (!is_logged_in() || !is_admin()) {
     redirect('index.php');
 }
 
@@ -30,14 +30,17 @@ if (isset($_GET['id'])) {
         $stmt = $conn->prepare("DELETE FROM users WHERE id = :id");
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         if ($stmt->execute()) {
-            redirect('index.php');
+            $_SESSION['notification'] = ['message' => 'Pengguna berhasil dihapus!', 'type' => 'success'];
         } else {
-            die("Gagal menghapus pengguna!");
+            $_SESSION['notification'] = ['message' => 'Gagal menghapus pengguna!', 'type' => 'error'];
         }
     } else {
-        die("Pengguna tidak ditemukan!");
+        $_SESSION['notification'] = ['message' => 'Pengguna tidak ditemukan!', 'type' => 'error'];
     }
 } else {
-    die("ID tidak valid!");
+    $_SESSION['notification'] = ['message' => 'ID tidak valid!', 'type' => 'error'];
 }
+
+// Redirect ke halaman index.php
+redirect('index.php');
 ?>
