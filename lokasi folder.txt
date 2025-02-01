@@ -6,9 +6,14 @@
 ├── /includes
 │   ├── config.php      # File konfigurasi database
 │   ├── auth.php        # File untuk fungsi login/register
-│   └── functions.php   # File untuk fungsi helper
+│   ├── functions.php   # File untuk fungsi helper
+│   ├── logging.php     # File untuk konfigurasi logging
+│   └── tests           # Folder untuk unit tests
+│       └── UserTest.php # Unit test untuk user (login, registrasi, CRUD)
 │
 ├── /uploads            # Folder untuk menyimpan file yang diupload
+│
+├── /logs               # Folder untuk menyimpan log aplikasi
 │
 ├── index.php           # Halaman utama setelah login
 ├── login.php           # Halaman login
@@ -19,4 +24,5 @@
 ├── dashboard.php       # Halaman dashboard setelah login
 ├── export.php          # Halaman untuk export data
 ├── import.php          # Halaman untuk import data
-└── logout.php          # File untuk logout
+├── logout.php          # File untuk logout
+└── phpunit.xml         # Konfigurasi untuk PHPUnit

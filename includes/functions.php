@@ -33,4 +33,22 @@ function validate_file($file) {
 function is_admin() {
     return isset($_SESSION['role']) && $_SESSION['role'] === 'admin';
 }
+
+// Fungsi untuk mencatat log aktivitas
+function log_activity($message) {
+    $log_file = 'logs/login.log'; // Lokasi file log
+    
+    // Membuka file log, jika tidak ada akan dibuat
+    $log = fopen($log_file, 'a');
+    
+    // Format log yang berisi timestamp dan pesan
+    $timestamp = date('Y-m-d H:i:s');
+    $log_message = "[$timestamp] - $message\n";
+    
+    // Menulis pesan log ke file
+    fwrite($log, $log_message);
+    
+    // Menutup file log
+    fclose($log);
+}
 ?>

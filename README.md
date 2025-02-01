@@ -32,13 +32,23 @@ Aplikasi CRUD (Create, Read, Update, Delete) sederhana yang dibangun menggunakan
 - **Notifikasi**: Tampilkan pesan sukses atau error saat melakukan operasi.
 
 ### **Tahap 5: Responsive Design & API Endpoint**
-- **Perbaiki tampilan aplikasi** : agar responsive menggunakan framework CSS seperti Bootstrap atau Tailwind CSS.
-- Buat **RESTful API** untuk aplikasi CRUD.
+- **Perbaiki tampilan aplikasi**: agar responsive menggunakan framework CSS seperti Bootstrap atau Tailwind CSS.
+- **Buat RESTful API** untuk aplikasi CRUD.
 - Implementasi **endpoint** seperti:
     - `GET /api/users` untuk mengambil data.
     - `POST /api/users` untuk menambah data.
     - `PUT /api/users/{id}` untuk mengupdate data.
     - `DELETE /api/users/{id}` untuk menghapus data.
+
+### **Tahap 6: Unit Testing & Logging**
+- **Unit Testing**: Menambahkan pengujian unit menggunakan PHPUnit untuk memastikan kualitas kode.
+    - **Test Case untuk CRUD**: Melakukan pengujian terhadap operasi CRUD (Create, Read, Update, Delete).
+    - **Test Case untuk Login & Registrasi**: Menguji alur login dan registrasi pengguna.
+  
+- **Logging**: Menambahkan fitur pencatatan aktivitas sistem.
+    - **Log Aktivitas**: Semua login, logout, dan aksi penting dicatat dalam file log untuk memudahkan debugging dan pemantauan aktivitas.
+    - **File Log**: Log disimpan dalam file `logs/login.log` dengan informasi timestamp dan pesan aktivitas.
+
 ---
 
 ## Teknologi yang Digunakan 🛠️
@@ -47,6 +57,8 @@ Aplikasi CRUD (Create, Read, Update, Delete) sederhana yang dibangun menggunakan
 - **MySQL**: Sebagai sistem manajemen database.
 - **HTML**: Untuk struktur tampilan web.
 - **CSS**: Untuk mempercantik tampilan antarmuka.
+- **PHPUnit**: Untuk unit testing aplikasi.
+- **Logging**: Menyimpan log aktivitas ke file untuk audit dan debugging.
 
 ---
 
@@ -56,16 +68,18 @@ Aplikasi CRUD (Create, Read, Update, Delete) sederhana yang dibangun menggunakan
 - PHP (versi 7.0 atau lebih baru)
 - MySQL
 - Web server (seperti XAMPP, WAMP, atau Laragon)
+- PHPUnit untuk pengujian
 
 ### Langkah-Langkah
 1. **Clone Repository**:
    ```bash
    git clone https://github.com/username/nama-repository.git
    ```
+
 2. **Buat Database**:
    - Buat database baru di MySQL dengan nama `crud_example`.
    - Jalankan query berikut untuk membuat tabel `users`:
-     ```sql
+      ```sql
    CREATE TABLE `users` (
    `id` int NOT NULL,
    `name` varchar(100) NOT NULL,
@@ -74,9 +88,12 @@ Aplikasi CRUD (Create, Read, Update, Delete) sederhana yang dibangun menggunakan
    `role` enum('admin','user') DEFAULT 'user',
    `profile_picture` varchar(255) DEFAULT NULL
    );
-     ```
+      ```
+
+
 3. **Simpan Project**:
    - Letakkan folder project di dalam direktori web server (misalnya, `htdocs` untuk XAMPP).
+
 4. **Konfigurasi Database**:
    - Buka file `config.php` dan sesuaikan dengan detail database kamu:
      ```php
@@ -85,8 +102,19 @@ Aplikasi CRUD (Create, Read, Update, Delete) sederhana yang dibangun menggunakan
      $username = 'root';
      $password = '';
      ```
+
 5. **Akses Aplikasi**:
    - Buka browser dan akses `http://localhost/nama-folder-project/index.php`.
+
+6. **Unit Testing**:
+   - Install PHPUnit jika belum terpasang.
+   - Jalankan pengujian unit dengan perintah:
+     ```bash
+     phpunit tests/CrudTest.php
+     ```
+
+7. **Logging**:
+   - Semua aktivitas login dan aksi penting akan tercatat di file log `logs/login.log`.
 
 ---
 

@@ -13,11 +13,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Validasi input
     if (empty($email) || empty($password)) {
         $error = 'Semua field harus diisi!';
+        log_activity("Gagal login: Email atau password kosong untuk email: {$email}");
     } else {
         if (login($email, $password)) {
+            log_activity("Berhasil login: {$email}");
             redirect('dashboard.php'); // Arahkan ke dashboard.php setelah login
         } else {
             $error = 'Email atau password salah!';
+            log_activity("Gagal login: Email atau password salah untuk email: {$email}");
         }
     }
 }
@@ -45,14 +48,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         
                         <!-- Menampilkan error jika ada -->
                         <?php if ($error): ?>
-                            <div class="alert alert-danger"><?php echo $error; ?></div>
+                            <div class="alert alert-danger"><?php echo htmlspecialchars($error); ?></div>
                         <?php endif; ?>
 
                         <!-- Form Login -->
                         <form method="POST">
                             <div class="form-group">
                                 <label for="email">Email:</label>
-                                <input type="email" class="form-control" id="email" name="email" required>
+                                <input type="email" class="form-control" id="email" name="email" value="<?php echo htmlspecialchars($email ?? ''); ?>" required>
                             </div>
                             <div class="form-group">
                                 <label for="password">Password:</label>
