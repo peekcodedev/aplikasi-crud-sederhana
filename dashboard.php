@@ -24,7 +24,7 @@ if (isset($_SESSION['notification'])): ?>
         <?php echo $_SESSION['notification']['message']; ?>
     </div>
     <?php unset($_SESSION['notification']); ?>
-<?php endif; ?> <!-- Pastikan tanda ini ada untuk menutup if -->
+<?php endif; ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -32,63 +32,74 @@ if (isset($_SESSION['notification'])): ?>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <h1>Selamat datang, <?php echo $_SESSION['user_name']; ?>!</h1>
-    <p>Ini adalah halaman dashboard.</p>
+    <div class="container mt-4">
+        <h1>Selamat datang, <?php echo $_SESSION['user_name']; ?>!</h1>
+        <p>Ini adalah halaman dashboard.</p>
 
-    <!-- Tombol Tambah Pengguna, Export, dan Import -->
-    <?php if (is_admin()): ?>
-        <a href="create.php" style="background-color: #008CBA;" class="btn">Tambah Pengguna</a>
-        <a href="export.php" style="background-color: #4CAF50;" class="btn">Export Data</a>
-        <a href="import.php" style="background-color: #f44336;" class="btn">Import Data</a>
-    <?php endif; ?>
-
-    <!-- Tabel Data Pengguna -->
-    <br><br>
-    <table>
-        <tr>
-            <th>ID</th>
-            <th>Nama</th>
-            <th>Email</th>
-            <th>Role</th>
-            <th>Foto Profil</th>
-            <th>Aksi</th>
-        </tr>
-        <?php if (!empty($users)): ?>
-            <?php foreach ($users as $user): ?>
-            <tr>
-                <td><?php echo htmlspecialchars($user['id']); ?></td>
-                <td><?php echo htmlspecialchars($user['name']); ?></td>
-                <td><?php echo htmlspecialchars($user['email']); ?></td>
-                <td><?php echo htmlspecialchars($user['role']); ?></td>
-                <td>
-                    <?php if ($user['profile_picture']): ?>
-                        <img src="<?php echo htmlspecialchars($user['profile_picture']); ?>" alt="Foto Profil" width="50">
-                    <?php else: ?>
-                        Tidak ada foto
-                    <?php endif; ?>
-                </td>
-                <td>
-                    <?php if (is_admin() || $user['id'] == $_SESSION['user_id']): ?>
-                        <a href="edit.php?id=<?php echo $user['id']; ?>" class="btn btn-edit">Edit</a>
-                    <?php endif; ?>
-                    <?php if (is_admin()): ?>
-                        <a href="delete.php?id=<?php echo $user['id']; ?>" class="btn btn-delete" onclick="return confirm('Yakin ingin menghapus?')">Hapus</a>
-                    <?php endif; ?>
-                </td>
-            </tr>
-            <?php endforeach; ?>
-        <?php else: ?>
-            <tr>
-                <td colspan="6">Tidak ada data pengguna.</td>
-            </tr>
+        <!-- Tombol Tambah Pengguna, Export, dan Import -->
+        <?php if (is_admin()): ?>
+            <div class="mb-3">
+                <a href="create.php" class="btn btn-primary">Tambah Pengguna</a>
+                <a href="export.php" class="btn btn-success">Export Data</a>
+                <a href="import.php" class="btn btn-danger">Import Data</a>
+            </div>
         <?php endif; ?>
-    </table>
 
-    <!-- Tombol Logout -->
-    <br>
-    <a href="logout.php" style="background-color: #f44336;" class="btn">Logout</a>
+        <!-- Tabel Data Pengguna -->
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nama</th>
+                        <th>Email</th>
+                        <th>Role</th>
+                        <th>Foto Profil</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php if (!empty($users)): ?>
+                        <?php foreach ($users as $user): ?>
+                            <tr>
+                                <td><?php echo htmlspecialchars($user['id']); ?></td>
+                                <td><?php echo htmlspecialchars($user['name']); ?></td>
+                                <td><?php echo htmlspecialchars($user['email']); ?></td>
+                                <td><?php echo htmlspecialchars($user['role']); ?></td>
+                                <td>
+                                    <?php if ($user['profile_picture']): ?>
+                                        <img src="<?php echo htmlspecialchars($user['profile_picture']); ?>" alt="Foto Profil" width="50">
+                                    <?php else: ?>
+                                        Tidak ada foto
+                                    <?php endif; ?>
+                                </td>
+                                <td>
+                                    <?php if (is_admin() || $user['id'] == $_SESSION['user_id']): ?>
+                                        <a href="edit.php?id=<?php echo $user['id']; ?>" class="btn btn-warning btn-sm">Edit</a>
+                                    <?php endif; ?>
+                                    <?php if (is_admin()): ?>
+                                        <a href="delete.php?id=<?php echo $user['id']; ?>" class="btn btn-danger btn-sm" onclick="return confirm('Yakin ingin menghapus?')">Hapus</a>
+                                    <?php endif; ?>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                    <?php else: ?>
+                        <tr>
+                            <td colspan="6" class="text-center">Tidak ada data pengguna.</td>
+                        </tr>
+                    <?php endif; ?>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Tombol Logout -->
+        <a href="logout.php" class="btn btn-danger">Logout</a>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

@@ -1,0 +1,13 @@
+Dokumentasi API dengan Postman
+
+1. Buat Koleksi di Postman:
+    a. Buka Postman dan buat koleksi baru.
+    b. Tambahkan request untuk setiap endpoint (GET, POST, PUT, DELETE).
+
+2. Menguji API di Postman:
+
+    a. Untuk GET /api/users, gunakan method GET untuk mengambil semua pengguna.
+    b. Untuk POST /api/users, gunakan method POST dan kirimkan data JSON di body (misalnya: {  
+        "name": "Mass Ulin", "email": "masulin@example.com", "password": "password123" }).
+    c. Untuk PUT /api/users/{id}, gunakan method PUT dan kirimkan data JSON untuk update pengguna.
+    d. Untuk DELETE /api/users/{id}, gunakan method DELETE untuk menghapus pengguna berdasarkan ID.

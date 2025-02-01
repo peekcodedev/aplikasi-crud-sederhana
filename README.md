@@ -30,6 +30,15 @@ Aplikasi CRUD (Create, Read, Update, Delete) sederhana yang dibangun menggunakan
 - **Export Data**: Pengguna dapat mengekspor data pengguna ke format CSV.
 - **Import Data**: Pengguna dapat mengimpor data pengguna dari file CSV.
 - **Notifikasi**: Tampilkan pesan sukses atau error saat melakukan operasi.
+
+### **Tahap 5: Responsive Design & API Endpoint**
+- **Perbaiki tampilan aplikasi** : agar responsive menggunakan framework CSS seperti Bootstrap atau Tailwind CSS.
+- Buat **RESTful API** untuk aplikasi CRUD.
+- Implementasi **endpoint** seperti:
+    - `GET /api/users` untuk mengambil data.
+    - `POST /api/users` untuk menambah data.
+    - `PUT /api/users/{id}` untuk mengupdate data.
+    - `DELETE /api/users/{id}` untuk menghapus data.
 ---
 
 ## Teknologi yang Digunakan 🛠️

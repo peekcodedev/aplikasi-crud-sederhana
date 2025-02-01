@@ -93,33 +93,58 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Pengguna</title>
-    <link rel="stylesheet" href="css/style.css">
+    <!-- Menambahkan Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
-    <h1>Edit Pengguna</h1>
-    <?php if ($error): ?>
-        <?php echo display_error($error); ?>
-    <?php endif; ?>
-    <form method="POST" enctype="multipart/form-data">
-        <input type="hidden" name="id" value="<?php echo $user['id']; ?>">
-        <div class="form-group">
-            <label for="name">Nama:</label>
-            <input type="text" id="name" name="name" value="<?php echo htmlspecialchars($user['name']); ?>" required>
+<body class="bg-light">
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card mt-5">
+                    <div class="card-body">
+                        <h3 class="card-title text-center mb-4">Edit Pengguna</h3>
+                        
+                        <!-- Menampilkan error jika ada -->
+                        <?php if ($error): ?>
+                            <div class="alert alert-danger"><?php echo $error; ?></div>
+                        <?php endif; ?>
+
+                        <!-- Form untuk mengedit pengguna -->
+                        <form method="POST" enctype="multipart/form-data">
+                            <input type="hidden" name="id" value="<?php echo $user['id']; ?>">
+                            
+                            <div class="form-group">
+                                <label for="name">Nama:</label>
+                                <input type="text" class="form-control" id="name" name="name" value="<?php echo htmlspecialchars($user['name']); ?>" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="email">Email:</label>
+                                <input type="email" class="form-control" id="email" name="email" value="<?php echo htmlspecialchars($user['email']); ?>" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="profile_picture">Foto Profil:</label>
+                                <input type="file" class="form-control-file" id="profile_picture" name="profile_picture">
+                                <?php if ($user['profile_picture']): ?>
+                                    <p>Foto Profil Saat Ini: <img src="<?php echo $user['profile_picture']; ?>" width="100"></p>
+                                <?php endif; ?>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary btn-block">Update</button>
+                        </form>
+
+                        <p class="text-center mt-3"><a href="index.php">Kembali ke Daftar Pengguna</a></p>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="form-group">
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" value="<?php echo htmlspecialchars($user['email']); ?>" required>
-        </div>
-        <div class="form-group">
-            <label for="profile_picture">Foto Profil:</label>
-            <input type="file" id="profile_picture" name="profile_picture">
-            <?php if ($user['profile_picture']): ?>
-                <p>Foto Profil Saat Ini: <img src="<?php echo $user['profile_picture']; ?>" width="100"></p>
-            <?php endif; ?>
-        </div>
-        <button type="submit">Update</button>
-    </form>
-    <br>
-    <a href="index.php">Kembali ke Daftar Pengguna</a>
+    </div>
+
+    <!-- Menambahkan Bootstrap JS (optional) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
